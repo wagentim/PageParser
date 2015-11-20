@@ -13,7 +13,7 @@ public class Site
 	private String name = StringConstants.EMPTY_STRING;
 	private String link = StringConstants.EMPTY_STRING;
 	private int id;
-	private List<String> jsoup;
+	private List<String> selector;
 	
 	public String getName()
 	{
@@ -39,14 +39,14 @@ public class Site
 	
 
 	@XmlElement
-	public void setJsoup(List<String> jsoup)
+	public void setSelector(List<String> selector)
 	{
-		this.jsoup = jsoup;
+		this.selector = selector;
 	}
 	
-	public List<String> getJsoup()
+	public List<String> getSelector()
 	{
-		return jsoup;
+		return selector;
 	}
 
 	public int getId()
@@ -64,8 +64,6 @@ public class Site
 	public String toString()
 	{
 		return "Site [name=" + name + ", link=" + link + ", id=" + id
-				+ ", jsoup=" + jsoup + "]";
+				+ ", selector=" + selector + "]";
 	}
-	
-	
 }

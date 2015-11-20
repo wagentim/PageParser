@@ -3,4 +3,5 @@
 	<name>DaZhe</name>
 	<link>www.dazhe.de</link>
 	<id>1</id>
+	<selector>article header</selector>
 </site>
