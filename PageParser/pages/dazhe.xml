@@ -3,5 +3,8 @@
 	<name>DaZhe</name>
 	<link>www.dazhe.de</link>
 	<id>1</id>
-	<selector>article header</selector>
+	<selector>
+		<key>article header</key>
+		<parser>DaZhePageParser</parser>
+	</selector>
 </site>

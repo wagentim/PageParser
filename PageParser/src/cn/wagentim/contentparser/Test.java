@@ -6,6 +6,6 @@ public class Test
 	{
 		XMLLoader loader = new XMLLoader();
 		Site site = loader.loadSiteDef("dazhe.xml");
-		System.out.println(site.toString());
+		
 	}
 }

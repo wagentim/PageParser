@@ -13,7 +13,7 @@ public class Site
 	private String name = StringConstants.EMPTY_STRING;
 	private String link = StringConstants.EMPTY_STRING;
 	private int id;
-	private List<String> selector;
+	private List<Selector> selector;
 	
 	public String getName()
 	{
@@ -39,12 +39,12 @@ public class Site
 	
 
 	@XmlElement
-	public void setSelector(List<String> selector)
+	public void setSelector(List<Selector> selector)
 	{
 		this.selector = selector;
 	}
 	
-	public List<String> getSelector()
+	public List<Selector> getSelector()
 	{
 		return selector;
 	}

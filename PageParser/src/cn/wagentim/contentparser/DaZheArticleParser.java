@@ -1,12 +1,12 @@
 package cn.wagentim.contentparser;
 
-
-public class DefaultPageParser implements IPageParser
+public final class DaZheArticleParser implements IPageParser
 {
 
 	@Override
 	public void parser(String content)
 	{
-		
+
 	}
+
 }
