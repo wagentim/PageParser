@@ -3,6 +3,10 @@ package cn.wagentim.contentparser;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 import cn.wagentim.connection.GetPageContent;
 
 public class Runner
@@ -51,6 +55,36 @@ public class Runner
 	
 	private void recusiveParserPages(String pageConent, GetPageContent pageLoader, Site site, List<String> result )
 	{
+		Document doc = Jsoup.parse(pageConent);
+		List<Selector> selectors = site.getSelector();
 		
+		for(int i = 0; i < selectors.size(); i++)
+		{
+			Selector selector = selectors.get(i);
+			IPageParser parser = null;
+			try
+			{
+				parser = (IPageParser) Class.forName(selector.getParser()).newInstance();
+			}
+			catch (InstantiationException | IllegalAccessException | ClassNotFoundException e)
+			{
+				e.printStackTrace();
+			}
+			
+			Elements elements = doc.select(selector.getKey());
+			
+			if( null != parser && !elements.isEmpty() )
+			{
+				for( int j = 0; j < elements.size(); j++ )
+				{
+					parser.parser(elements.get(j));
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		new Runner().start();
 	}
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
 	<name>DaZhe</name>
-	<link>www.dazhe.de</link>
+	<link>http://dazhe.de/cn</link>
 	<id>1</id>
 	<selector>
 		<key>article header</key>
-		<parser>DaZhePageParser</parser>
+		<parser>cn.wagentim.contentparser.DaZheArticleParser</parser>
 	</selector>
 </site>

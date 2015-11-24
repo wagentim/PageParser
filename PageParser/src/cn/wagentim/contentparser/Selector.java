@@ -9,7 +9,7 @@ import cn.wagentim.basicutils.StringConstants;
 public class Selector
 {	
 	private String key = StringConstants.EMPTY_STRING;;
-	private String className = StringConstants.EMPTY_STRING;
+	private String parser = StringConstants.EMPTY_STRING;
 	
 	@XmlElement
 	public void setKey(String key)
@@ -23,13 +23,13 @@ public class Selector
 	}
 	
 	@XmlElement
-	public void setClassName(String className)
+	public void setParser(String parser)
 	{
-		this.className = className;
+		this.parser = parser;
 	}
 	
-	public String getClassName()
+	public String getParser()
 	{
-		return this.className;
+		return this.parser;
 	}
 }
