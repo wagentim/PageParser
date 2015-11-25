@@ -137,9 +137,15 @@ public class Runner implements HTMLConstants
 		String className = selector.getParser();
 		String result = selector.getResult();
 		IPageParser parser = null;
+		Element e = element;
 		
 		// block for handling user defined selector grammar
-		if( selectKey.isEmpty() )
+		if( !selectKey.isEmpty() )
+		{
+			e = element.select(selectKey).first();
+		}
+		
+		if( null == e )
 		{
 			return null;
 		}
@@ -152,25 +158,17 @@ public class Runner implements HTMLConstants
 				parser = (IPageParser)Class.forName(className).newInstance();
 			}
 			catch (InstantiationException | IllegalAccessException
-					| ClassNotFoundException e)
+					| ClassNotFoundException e1)
 			{
 				parser = null;
 			}
 		}
 
-		Elements selElements = element.select(selectKey);
-		
-		if( selElements.isEmpty() )
-		{
-			return null;
-		}
-		
 		if( null != parser )
 		{
-			return parser.parser(selElements);
+			return parser.parser(e);
 		}
 		
-		Element e = selElements.first();
 		String[] tokens = result.split(":");
 		
 		return getResult(e, tokens);
@@ -183,6 +181,10 @@ public class Runner implements HTMLConstants
 		if( ATTR.equals(key) )
 		{
 			return e.attr(tokens[1]);
+		}
+		else if( TEXT.equals(key) )
+		{
+			return e.text();
 		}
 		
 		return null;

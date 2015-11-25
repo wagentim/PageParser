@@ -4,10 +4,17 @@
 	<link>http://dazhe.de/cn</link>
 	<id>1</id>
 	<block>
+		<selector>
+			<result>attr:id</result>
+		</selector>
 		<key>article</key>
 		<selector>
-			<key>div.entry a img</key>
-			<result>attr:alt</result>
+			<key>header h2 a</key>
+			<result>attr:title</result>
+		</selector>
+		<selector>
+			<key>header div.postdata span.category a</key>
+			<result>text</result>
 		</selector>
 	</block>
 </site>

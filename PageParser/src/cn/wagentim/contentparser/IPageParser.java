@@ -1,9 +1,9 @@
 package cn.wagentim.contentparser;
 
-import org.jsoup.select.Elements;
+import org.jsoup.nodes.Element;
 
 
 public interface IPageParser
 {
-	String parser(Elements element);
+	String parser(Element element);
 }
