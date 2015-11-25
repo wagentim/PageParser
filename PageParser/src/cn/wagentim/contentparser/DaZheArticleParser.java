@@ -1,13 +1,14 @@
 package cn.wagentim.contentparser;
 
-import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public final class DaZheArticleParser implements IPageParser
 {
 
 	@Override
-	public void parser(Element element)
+	public String parser(Elements element)
 	{
 		System.out.println(element);
+		return null;
 	}
 }

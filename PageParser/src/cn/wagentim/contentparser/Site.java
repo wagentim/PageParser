@@ -13,7 +13,7 @@ public class Site
 	private String name = StringConstants.EMPTY_STRING;
 	private String link = StringConstants.EMPTY_STRING;
 	private int id;
-	private List<Selector> selector;
+	private List<Block> block;
 	
 	public String getName()
 	{
@@ -39,14 +39,14 @@ public class Site
 	
 
 	@XmlElement
-	public void setSelector(List<Selector> selector)
+	public void setBlock(List<Block> block)
 	{
-		this.selector = selector;
+		this.block = block;
 	}
 	
-	public List<Selector> getSelector()
+	public List<Block> getBlock()
 	{
-		return selector;
+		return block;
 	}
 
 	public int getId()
@@ -64,6 +64,6 @@ public class Site
 	public String toString()
 	{
 		return "Site [name=" + name + ", link=" + link + ", id=" + id
-				+ ", selector=" + selector + "]";
+				+ ", block=" + block + "]";
 	}
 }

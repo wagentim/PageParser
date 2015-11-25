@@ -3,8 +3,11 @@
 	<name>DaZhe</name>
 	<link>http://dazhe.de/cn</link>
 	<id>1</id>
-	<selector>
-		<key>article header</key>
-		<parser>cn.wagentim.contentparser.DaZheArticleParser</parser>
-	</selector>
+	<block>
+		<key>article</key>
+		<selector>
+			<key>div.entry a img</key>
+			<result>attr:alt</result>
+		</selector>
+	</block>
 </site>
