@@ -59,35 +59,40 @@ public class SelectorParser implements IParser
 		
 		if( Validator.isNull(parserElement) )
 		{
-			logger.error(siteInfo + "SelectorParser#parser the parser element is invalid!");
+			logger.error(siteInfo + " : " + "SelectorParser#parser the parser element is invalid!");
 			return StringConstants.EMPTY_STRING;
 		}
 
 		if( Validator.isNull(selector) )
 		{
-			logger.error(siteInfo + "SelectorParser#parser the selector object is invalid!");
+			logger.error(siteInfo + " : " + "SelectorParser#parser the selector object is invalid!");
 			return StringConstants.EMPTY_STRING;
 		}
 		
 		if( Validator.isNull(resultParser) )
 		{
-			logger.error(siteInfo + "SelectorParser#parser the result parser is invalid!");
+			logger.error(siteInfo + " : " + "SelectorParser#parser the result parser is invalid!");
 			return StringConstants.EMPTY_STRING;
 		}
 
 		final String key = selector.getKey();
-
+		
+		final Element selectedElement;
+		
 		if( key.isEmpty() )
 		{
-			logger.error(siteInfo + "SelectorParser#parser the key definition is invalid!");
-			return StringConstants.EMPTY_STRING;
+			logger.warn(siteInfo + " : " + "SelectorParser#parser the key definition is invalid!");
+			selectedElement = parserElement;
+		}
+		else
+		{
+			selectedElement = parserElement.select(key).first();
 		}
 		
-		Element	selectedElement = parserElement.select(key).first();
 		
 		if( Validator.isNull(selectedElement) )
 		{
-			logger.error(siteInfo + "SelectorParser#parser No Element is found with the given select key");
+			logger.error(siteInfo + " : " + "SelectorParser#parser No Element is found with the given select key");
 			return StringConstants.EMPTY_STRING;
 		}
 		

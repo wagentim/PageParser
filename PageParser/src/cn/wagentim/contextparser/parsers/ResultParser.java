@@ -63,13 +63,13 @@ public class ResultParser implements IParser, IHTMLConstants
 
 		if( resultDef.isEmpty() )
 		{
-			logger.error(siteInfo + "ResultParser#parser the result definition is invalid!");
+			logger.error(siteInfo + " : " + "ResultParser#parser the result definition is invalid!");
 			return StringConstants.EMPTY_STRING;
 		}
 		
 		if( Validator.isNull(parserElement) )
 		{
-			logger.error(siteInfo + "ResultParser#parser the parser element is invalid!");
+			logger.error(siteInfo + " : " + "ResultParser#parser the parser element is invalid!");
 			return StringConstants.EMPTY_STRING;
 		}
 		
@@ -77,13 +77,22 @@ public class ResultParser implements IParser, IHTMLConstants
 		
 		if( null == tokens || tokens.length <= 0 || tokens.length > 2 )
 		{
-			logger.error(siteInfo + "ResultParser#parser the result definition is invalid!");
+			logger.error(siteInfo + " : " + "ResultParser#parser the result definition is invalid!");
 			return StringConstants.EMPTY_STRING;
 		}
 		
 		final String key = tokens[0];
-		final String value = StringConstants.EMPTY_STRING;
+		final String value;
 		
+		if( tokens.length == 2 )
+		{
+			value = tokens[1];
+		}
+		else
+		{
+			value = StringConstants.EMPTY_STRING;
+		}
+
 		// continue to implement other tag or definitions
 		if( ATTR.equals(key) && !value.isEmpty() )
 		{

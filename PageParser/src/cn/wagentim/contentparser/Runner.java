@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import cn.wagentim.basicutils.FileHelper;
 import cn.wagentim.basicutils.Validator;
 import cn.wagentim.connection.GetPageContent;
 import cn.wagentim.contextparser.parsers.BlockParser;
@@ -18,10 +19,13 @@ public class Runner implements IHTMLConstants
 {
 	private static final Logger logger = LogManager.getLogger(Runner.class);
 	private static final String[] xmlFiles = new String[]{"dazhe.xml"};
-	private static final boolean readFromFile = false;
+	private static final boolean readFromFile = true;
+	private static final String IN_FILE = "c://temp//temp.txt";
+	private static final String OUT_FILE = "c://temp//result.txt";
 	
 	private final XMLLoader loader;
 	private final BlockParser blockParser;
+	private FileHelper fh = null; 
 	
 	public Runner()
 	{
@@ -54,7 +58,7 @@ public class Runner implements IHTMLConstants
 			return;
 		}
 		
-		logger.info("Runner#handleFile handle Site [%1]", site);
+		logger.info("Runner#handleFile handle Site [" + site.getName() + "]");
 		
 		if( !readFromFile )
 		{
@@ -62,7 +66,20 @@ public class Runner implements IHTMLConstants
 		}
 		else
 		{
+			if( null == fh )
+			{
+				fh = new FileHelper();
+			}
 			
+			String content = fh.readTextFile(IN_FILE);
+			
+			if( content.isEmpty() )
+			{
+				logger.error("Runner#handleFile load html content from file is failed! Empty Data!");
+				return;
+			}
+			
+			parserPage(content, null, site);
 		}
 	}
 
@@ -77,6 +94,7 @@ public class Runner implements IHTMLConstants
 	private void parserPage(String pageConent, GetPageContent pageLoader, Site site)
 	{
 		Document doc = Jsoup.parse(pageConent);
+		
 		List<Block> blocks = site.getBlock();
 		
 		if( blocks.isEmpty() )
@@ -111,6 +129,29 @@ public class Runner implements IHTMLConstants
 			
 			String resultOfBlock = blockParser.parser();
 			results.add(resultOfBlock);
+		}
+		
+		writeResultToFile(results);
+	}
+	
+	private void writeResultToFile(List<String> results)
+	{
+		if( Validator.isNull(results) || results.size() <= 0 )
+		{
+			logger.error("Runner#writeResultToFile the results that need to write to file is empty!");
+			return;
+		}
+		
+		StringBuffer sb = new StringBuffer();
+		
+		for( int i = 0; i < results.size(); i++ )
+		{
+			sb.append(results.get(i));
+		}
+		
+		if( null != fh )
+		{
+			fh.writeToFile(sb.toString(), OUT_FILE);
 		}
 	}
 	

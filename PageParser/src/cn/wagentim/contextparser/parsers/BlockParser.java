@@ -52,19 +52,19 @@ public class BlockParser implements IParser
 		
 		if( Validator.isNull(parserElement) )
 		{
-			logger.error(siteInfo + "BlockParser#parser the parser element is invalid!");
+			logger.error(siteInfo + " : " + "BlockParser#parser the parser element is invalid!");
 			return StringConstants.EMPTY_STRING;
 		}
 
 		if( Validator.isNull(block) )
 		{
-			logger.error(siteInfo + "BlockParser#parser the block object is invalid!");
+			logger.error(siteInfo + " : " + "BlockParser#parser the block object is invalid!");
 			return StringConstants.EMPTY_STRING;
 		}
 		
 		if( Validator.isNull(selectParser) )
 		{
-			logger.error(siteInfo + "BlockParser#parser the seletor parser is invalid!");
+			logger.error(siteInfo + " : " + "BlockParser#parser the seletor parser is invalid!");
 			return StringConstants.EMPTY_STRING;
 		}
 		
@@ -72,7 +72,7 @@ public class BlockParser implements IParser
 		
 		if( selectors.isEmpty() )
 		{
-			logger.error(siteInfo + "BlockParser#parser defined selectors is empty!");
+			logger.error(siteInfo + " : " + "BlockParser#parser defined selectors is empty!");
 			return StringConstants.EMPTY_STRING;
 		}
 		
