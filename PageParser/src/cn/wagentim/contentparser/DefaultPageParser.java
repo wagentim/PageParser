@@ -1,13 +1,13 @@
 package cn.wagentim.contentparser;
 
-import org.jsoup.nodes.Element;
+import cn.wagentim.contextparser.parsers.IParser;
 
 
-public class DefaultPageParser implements IPageParser
+public class DefaultPageParser implements IParser
 {
 
 	@Override
-	public String parser(Element content)
+	public String parser()
 	{
 		return null;
 		

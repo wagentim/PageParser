@@ -13,8 +13,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import cn.wagentim.connection.GetPageContent;
+import cn.wagentim.contextparser.parsers.IParser;
 
-public class Runner implements HTMLConstants
+public class Runner implements IHTMLConstants
 {
 	private static final String[] xmlFiles = new String[]{"dazhe.xml"};
 	private final XMLLoader loader;
@@ -136,7 +137,7 @@ public class Runner implements HTMLConstants
 		String selectKey = selector.getKey();
 		String className = selector.getParser();
 		String result = selector.getResult();
-		IPageParser parser = null;
+		IParser parser = null;
 		Element e = element;
 		
 		// block for handling user defined selector grammar
@@ -155,7 +156,7 @@ public class Runner implements HTMLConstants
 		{
 			try
 			{
-				parser = (IPageParser)Class.forName(className).newInstance();
+				parser = (IParser)Class.forName(className).newInstance();
 			}
 			catch (InstantiationException | IllegalAccessException
 					| ClassNotFoundException e1)
@@ -166,7 +167,7 @@ public class Runner implements HTMLConstants
 
 		if( null != parser )
 		{
-			return parser.parser(e);
+//			return parser.parser(e);
 		}
 		
 		String[] tokens = result.split(":");
