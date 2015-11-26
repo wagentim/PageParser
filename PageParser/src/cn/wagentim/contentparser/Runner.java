@@ -1,9 +1,5 @@
 package cn.wagentim.contentparser;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,30 +7,33 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
+import cn.wagentim.basicutils.Validator;
 import cn.wagentim.connection.GetPageContent;
-import cn.wagentim.contextparser.parsers.IParser;
+import cn.wagentim.contextparser.parsers.BlockParser;
 import cn.wagentim.xmlunits.Block;
-import cn.wagentim.xmlunits.Selector;
 import cn.wagentim.xmlunits.Site;
 
 public class Runner implements IHTMLConstants
 {
 	private static final Logger logger = LogManager.getLogger(Runner.class);
 	private static final String[] xmlFiles = new String[]{"dazhe.xml"};
+	private static final boolean readFromFile = false;
+	
 	private final XMLLoader loader;
+	private final BlockParser blockParser;
 	
 	public Runner()
 	{
 		loader = new XMLLoader();
+		blockParser = new BlockParser();
 	}
 	
 	public void start()
 	{
 		if( null == loader )
 		{
+			logger.error("Runner#start the xml loader is invalid!");
 			return;
 		}
 		
@@ -48,12 +47,23 @@ public class Runner implements IHTMLConstants
 	{
 		Site site = loader.loadSiteDef(xmlFile);
 		
+		
 		if( null == site)
 		{
-			return ;
+			logger.error("Runner#handleFile site infomation is invalid!");
+			return;
 		}
 		
-		processSite(site, new GetPageContent());
+		logger.info("Runner#handleFile handle Site [%1]", site);
+		
+		if( !readFromFile )
+		{
+			processSite(site, new GetPageContent());
+		}
+		else
+		{
+			
+		}
 	}
 
 	private void processSite(Site site, GetPageContent pageLoader)
@@ -63,6 +73,7 @@ public class Runner implements IHTMLConstants
 		parserPage(content, pageLoader, site);
 	}
 	
+	
 	private void parserPage(String pageConent, GetPageContent pageLoader, Site site)
 	{
 		Document doc = Jsoup.parse(pageConent);
@@ -70,74 +81,39 @@ public class Runner implements IHTMLConstants
 		
 		if( blocks.isEmpty() )
 		{
+			logger.error("Runner#parserPage in xml file defined block object is invalid!");
 			return;
 		}
+		
+		List<String> results = new ArrayList<String>();
 		
 		for( int i = 0; i < blocks.size(); i++ )
 		{
-			handleBlock(doc, blocks.get(i), pageLoader, new ArrayList<String>());
+			Block block = blocks.get(i);
+			
+			if( Validator.isNull(block) )
+			{
+				logger.error(site.getName() + "Runner#parserPage the block [%1] is null!", i);
+				continue;
+			}
+			
+			final String key = block.getKey();
+			
+			if( key.isEmpty() )
+			{
+				logger.error(site.getName() + "Runner#parserPage No key word is defined in the block [%1]!", i);
+				continue;
+			}
+			
+			blockParser.setBlock(block);
+			blockParser.setSiteInfo(site.getName());
+			blockParser.setParserElement(doc.select(key).first());
+			
+			String resultOfBlock = blockParser.parser();
+			results.add(resultOfBlock);
 		}
 	}
 	
-	private void handleBlock(Document doc, Block block, GetPageContent pageLoader, List<String> result)
-	{
-		String blockKey = block.getKey();
-		Elements elements = doc.select(blockKey);
-		
-		if(elements.isEmpty())
-		{
-			return;
-		}
-		
-		for(int i = 0; i < elements.size(); i++)
-		{
-			String blockResult = parserBlock(elements.get(i), block.getSelector());
-			
-			if( blockResult.isEmpty() )
-			{
-				continue;
-			}
-			
-			result.add(blockResult);
-		}
-		
-		// this block will write the result to the file
-		try
-		{
-			Files.write(Paths.get("c://temp/result.txt"), result, Charset.forName("utf8"));
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	private String parserBlock(Element element, List<Selector> selector)
-	{
-		if(selector.isEmpty())
-		{
-			return null;
-		}
-		
-		StringBuffer sb = new StringBuffer();
-		
-		for(int i = 0; i < selector.size(); i++)
-		{
-			String selectResult = handleSelector(element, selector.get(i));
-			
-			if( selector.isEmpty() )
-			{
-				continue;
-			}
-			
-			sb.append(selectResult);
-			sb.append(" : ");
-		}
-		
-		return sb.toString();
-	}
-
 	public static void main(String[] args)
 	{
 		new Runner().start();

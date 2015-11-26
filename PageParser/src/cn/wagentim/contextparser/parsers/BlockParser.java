@@ -68,14 +68,6 @@ public class BlockParser implements IParser
 			return StringConstants.EMPTY_STRING;
 		}
 		
-		final String key = block.getKey();
-		
-		if( key.isEmpty() )
-		{
-			logger.error(siteInfo + "BlockParser#parser the key definition is invalid!");
-			return StringConstants.EMPTY_STRING;
-		}
-		
 		final List<Selector> selectors = block.getSelector();
 		
 		if( selectors.isEmpty() )
