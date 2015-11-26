@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,9 +16,13 @@ import org.jsoup.select.Elements;
 
 import cn.wagentim.connection.GetPageContent;
 import cn.wagentim.contextparser.parsers.IParser;
+import cn.wagentim.xmlunits.Block;
+import cn.wagentim.xmlunits.Selector;
+import cn.wagentim.xmlunits.Site;
 
 public class Runner implements IHTMLConstants
 {
+	private static final Logger logger = LogManager.getLogger(Runner.class);
 	private static final String[] xmlFiles = new String[]{"dazhe.xml"};
 	private final XMLLoader loader;
 	
@@ -130,65 +136,6 @@ public class Runner implements IHTMLConstants
 		}
 		
 		return sb.toString();
-	}
-
-	private String handleSelector(Element element, Selector selector)
-	{
-		String selectKey = selector.getKey();
-		String className = selector.getParser();
-		String result = selector.getResult();
-		IParser parser = null;
-		Element e = element;
-		
-		// block for handling user defined selector grammar
-		if( !selectKey.isEmpty() )
-		{
-			e = element.select(selectKey).first();
-		}
-		
-		if( null == e )
-		{
-			return null;
-		}
-		
-		// block for using user defined 
-		if( !className.isEmpty() )
-		{
-			try
-			{
-				parser = (IParser)Class.forName(className).newInstance();
-			}
-			catch (InstantiationException | IllegalAccessException
-					| ClassNotFoundException e1)
-			{
-				parser = null;
-			}
-		}
-
-		if( null != parser )
-		{
-//			return parser.parser(e);
-		}
-		
-		String[] tokens = result.split(":");
-		
-		return getResult(e, tokens);
-	}
-
-	private String getResult(Element e, String[] tokens)
-	{
-		String key = tokens[0];
-		
-		if( ATTR.equals(key) )
-		{
-			return e.attr(tokens[1]);
-		}
-		else if( TEXT.equals(key) )
-		{
-			return e.text();
-		}
-		
-		return null;
 	}
 
 	public static void main(String[] args)

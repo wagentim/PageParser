@@ -8,6 +8,12 @@ import cn.wagentim.basicutils.StringConstants;
 import cn.wagentim.basicutils.Validator;
 import cn.wagentim.contentparser.IHTMLConstants;
 
+/**
+ * Parser the Result tag 
+ * 
+ * @author bihu8398
+ *
+ */
 public class ResultParser implements IParser, IHTMLConstants
 {
 	private static final Logger logger = LogManager.getLogger(ResultParser.class);
@@ -78,6 +84,7 @@ public class ResultParser implements IParser, IHTMLConstants
 		final String key = tokens[0];
 		final String value = StringConstants.EMPTY_STRING;
 		
+		// continue to implement other tag or definitions
 		if( ATTR.equals(key) && !value.isEmpty() )
 		{
 			return parserElement.attr(value);

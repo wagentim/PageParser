@@ -6,6 +6,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import cn.wagentim.xmlunits.Site;
+
 public final class XMLLoader
 {
 	private static final String DIR = "pages/";

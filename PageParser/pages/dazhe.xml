@@ -4,10 +4,10 @@
 	<link>http://dazhe.de/cn</link>
 	<id>1</id>
 	<block>
+		<key>article</key>
 		<selector>
 			<result>attr:id</result>
 		</selector>
-		<key>article</key>
 		<selector>
 			<key>header h2 a</key>
 			<result>attr:title</result>

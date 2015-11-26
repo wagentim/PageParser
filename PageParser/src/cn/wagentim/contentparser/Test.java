@@ -1,5 +1,7 @@
 package cn.wagentim.contentparser;
 
+import cn.wagentim.xmlunits.Site;
+
 public class Test
 {
 	public static void main(String[] args)

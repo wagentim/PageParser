@@ -1,4 +1,4 @@
-package cn.wagentim.contentparser;
+package cn.wagentim.xmlunits;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
