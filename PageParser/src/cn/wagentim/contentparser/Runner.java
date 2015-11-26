@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import cn.wagentim.basicutils.FileHelper;
 import cn.wagentim.basicutils.Validator;
@@ -125,10 +126,21 @@ public class Runner implements IHTMLConstants
 			
 			blockParser.setBlock(block);
 			blockParser.setSiteInfo(site.getName());
-			blockParser.setParserElement(doc.select(key).first());
 			
-			String resultOfBlock = blockParser.parser();
-			results.add(resultOfBlock);
+			Elements elements = doc.select(key);
+			
+			if( elements.isEmpty() )
+			{
+				logger.warn(site.getName() + " : " + "Runner#parserPage cannot find any elements with the block key: " + key);
+				continue;
+			}
+			
+			for(int j = 0; j < elements.size(); j++)
+			{
+				blockParser.setParserElement(elements.get(j));
+				String resultOfBlock = blockParser.parser();
+				results.add(resultOfBlock);
+			}
 		}
 		
 		writeResultToFile(results);
@@ -147,6 +159,7 @@ public class Runner implements IHTMLConstants
 		for( int i = 0; i < results.size(); i++ )
 		{
 			sb.append(results.get(i));
+			sb.append("\n");
 		}
 		
 		if( null != fh )
