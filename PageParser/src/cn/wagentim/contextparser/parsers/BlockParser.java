@@ -103,7 +103,6 @@ public class BlockParser implements IParser
 		for( int i = 0; i < results.size(); i++ )
 		{
 			sb.append(results.get(i));
-			sb.append(" : ");
 		}
 		
 		return sb.toString();

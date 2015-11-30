@@ -11,6 +11,7 @@ public class Selector
 	private String key = StringConstants.EMPTY_STRING;;
 	private String parser = StringConstants.EMPTY_STRING;
 	private String result = StringConstants.EMPTY_STRING;
+	private String name = StringConstants.EMPTY_STRING;
 	
 	@XmlElement
 	public void setKey(String key)
@@ -43,5 +44,16 @@ public class Selector
 	public String getResult()
 	{
 		return result;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	@XmlElement
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 }

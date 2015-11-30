@@ -20,7 +20,7 @@ public class Runner implements IHTMLConstants
 {
 	private static final Logger logger = LogManager.getLogger(Runner.class);
 	private static final String[] xmlFiles = new String[]{"dazhe.xml"};
-	private static final boolean readFromFile = true;
+	private static final boolean readFromFile = false;
 	private static final String IN_FILE = "c://temp//temp.txt";
 	private static final String OUT_FILE = "c://temp//result.txt";
 	
@@ -162,10 +162,12 @@ public class Runner implements IHTMLConstants
 			sb.append("\n");
 		}
 		
-		if( null != fh )
+		if( null == fh )
 		{
-			fh.writeToFile(sb.toString(), OUT_FILE);
+			fh = new FileHelper();
 		}
+		
+		fh.writeToFile(sb.toString(), OUT_FILE);
 	}
 	
 	public static void main(String[] args)

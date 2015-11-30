@@ -81,7 +81,6 @@ public class SelectorParser implements IParser
 		
 		if( key.isEmpty() )
 		{
-			logger.warn(siteInfo + " : " + "SelectorParser#parser the key definition is invalid!");
 			selectedElement = parserElement;
 		}
 		else
@@ -124,6 +123,7 @@ public class SelectorParser implements IParser
 		resultParser.setParserElement(selectedElement);
 		resultParser.setResultDef(resultDef);
 		resultParser.setSiteInfo(siteInfo);
+		resultParser.setResultName(selector.getName());
 		
 		return resultParser.parser();
 	}
@@ -137,7 +137,4 @@ public class SelectorParser implements IParser
 	{
 		this.selector = selector;
 	}
-	
-	
-
 }

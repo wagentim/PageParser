@@ -21,6 +21,7 @@ public class ResultParser implements IParser, IHTMLConstants
 	private String siteInfo;
 	private String resultDef;
 	private Element parserElement;
+	private String resultName = StringConstants.EMPTY_STRING;
 	
 	public String getSiteInfo()
 	{
@@ -105,5 +106,26 @@ public class ResultParser implements IParser, IHTMLConstants
 		
 		return StringConstants.EMPTY_STRING;
 	}
+
+	public String getResultName()
+	{
+		return resultName;
+	}
+
+	public void setResultName(String resultName)
+	{
+		this.resultName = resultName;
+	}
+	
+//	private String decorateResult(final String result)
+//	{
+//		StringBuffer sb = new StringBuffer();
+//		sb.append("[");
+//		sb.append(resultName);
+//		sb.append("] ");
+//		sb.append(result);
+//		sb.append("\n");
+//		return sb.toString();
+//	}
 
 }
