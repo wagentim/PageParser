@@ -2,9 +2,9 @@ package cn.wagentim.contentparser;
 
 import org.jsoup.nodes.Element;
 
-import cn.wagentim.contextparser.parsers.IParser;
+import cn.wagentim.contextparser.parsers.IParserString;
 
-public final class DaZheArticleParser implements IParser
+public final class DaZheArticleParser implements IParserString
 {
 	
 	private Element parserElement = null;

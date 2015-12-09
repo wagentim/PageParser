@@ -24,5 +24,10 @@
 			<key>a img</key>
 			<result>attr:src</result>
 		</selector>
+		<selector>
+			<name>Link</name>
+			<key>header div.title h2 a</key>
+			<result>attr:href</result>
+		</selector>
 	</block>
 </site>

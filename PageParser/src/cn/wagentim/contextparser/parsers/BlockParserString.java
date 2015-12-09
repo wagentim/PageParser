@@ -18,17 +18,17 @@ import cn.wagentim.xmlunits.Selector;
  * @author bihu8398
  *
  */
-public class BlockParser implements IParser
+public class BlockParserString implements IParserString
 {
-	private static final Logger logger = LogManager.getLogger(BlockParser.class);
+	private static final Logger logger = LogManager.getLogger(BlockParserString.class);
 	private Block block = null;
 	private String siteInfo = StringConstants.EMPTY_STRING;
 	private Element parserElement = null;
-	private final SelectorParser selectParser;
+	private final SelectorParserString selectParser;
 	
-	public BlockParser()
+	public BlockParserString()
 	{
-		selectParser = new SelectorParser();
+		selectParser = new SelectorParserString();
 	}
 	
 	public Block getBlock()
@@ -90,7 +90,7 @@ public class BlockParser implements IParser
 		
 		return sResult;
 	}
-
+	
 	private String processResult(List<String> results)
 	{
 		if( results.isEmpty() )
@@ -103,6 +103,7 @@ public class BlockParser implements IParser
 		for( int i = 0; i < results.size(); i++ )
 		{
 			sb.append(results.get(i));
+			sb.append("\n");
 		}
 		
 		return sb.toString();

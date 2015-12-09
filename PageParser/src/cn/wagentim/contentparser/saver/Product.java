@@ -2,6 +2,7 @@ package cn.wagentim.contentparser.saver;
 
 import java.io.Serializable;
 
+import javax.jdo.annotations.Unique;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +20,7 @@ public class Product implements IItem, Serializable
 	@Id @GeneratedValue
     private long id;
 	
+	@Id @Unique
 	private String itemID = StringConstants.EMPTY_STRING;
 	private String introduction = StringConstants.EMPTY_STRING;
 	private String site = StringConstants.EMPTY_STRING;

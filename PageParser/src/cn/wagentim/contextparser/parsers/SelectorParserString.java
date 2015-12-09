@@ -8,17 +8,17 @@ import cn.wagentim.basicutils.StringConstants;
 import cn.wagentim.basicutils.Validator;
 import cn.wagentim.xmlunits.Selector;
 
-public class SelectorParser implements IParser
+public class SelectorParserString implements IParserString
 {
-	private static final Logger logger = LogManager.getLogger(SelectorParser.class);
+	private static final Logger logger = LogManager.getLogger(SelectorParserString.class);
 	private String siteInfo = StringConstants.EMPTY_STRING;
 	private Element parserElement = null;
 	private Selector selector = null;
-	private final ResultParser resultParser;
+	private final ResultParserString resultParser;
 	
-	public SelectorParser()
+	public SelectorParserString()
 	{
-		resultParser = new ResultParser();
+		resultParser = new ResultParserString();
 	}
 	
 	public Element getElement()

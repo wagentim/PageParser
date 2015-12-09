@@ -1,9 +1,9 @@
 package cn.wagentim.contentparser;
 
-import cn.wagentim.contextparser.parsers.IParser;
+import cn.wagentim.contextparser.parsers.IParserString;
 
 
-public class DefaultPageParser implements IParser
+public class DefaultPageParser implements IParserString
 {
 
 	@Override

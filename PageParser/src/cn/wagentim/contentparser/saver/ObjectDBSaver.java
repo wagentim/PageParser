@@ -19,12 +19,32 @@ public class ObjectDBSaver implements ISaver
 	@Override
 	public void save(Product p)
 	{
+		if( null == p )
+		{
+			return;
+		}
 		
+		em.getTransaction().begin();
+		em.persist(p);
+		em.getTransaction().commit();
 	}
 
 	@Override
 	public void save(List<Product> list)
 	{
+		if( list.isEmpty() )
+		{
+			return;
+		}
+		
+		em.getTransaction().begin();
+		
+		for(int i = 0; i < list.size(); i++ )
+		{
+			em.persist(list.get(i));
+		}
+		
+		em.getTransaction().commit();
 		
 	}
 

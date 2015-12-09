@@ -14,9 +14,9 @@ import cn.wagentim.contentparser.IHTMLConstants;
  * @author bihu8398
  *
  */
-public class ResultParser implements IParser, IHTMLConstants
+public class ResultParserString implements IParserString, IHTMLConstants
 {
-	private static final Logger logger = LogManager.getLogger(ResultParser.class);
+	private static final Logger logger = LogManager.getLogger(ResultParserString.class);
 	
 	private String siteInfo;
 	private String resultDef;
