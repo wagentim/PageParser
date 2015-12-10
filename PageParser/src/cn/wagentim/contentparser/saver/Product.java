@@ -2,9 +2,7 @@ package cn.wagentim.contentparser.saver;
 
 import java.io.Serializable;
 
-import javax.jdo.annotations.Unique;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import cn.wagentim.basicutils.StringConstants;
@@ -17,10 +15,7 @@ public class Product implements IItem, Serializable, IProduct
 	 */
 	private static final long serialVersionUID = -4380857304277245465L;
 	
-	@Id @GeneratedValue
-    private long id;
-	
-	@Id @Unique
+	@Id
 	private String itemID = StringConstants.EMPTY_STRING;
 	private String introduction = StringConstants.EMPTY_STRING;
 	private String site = StringConstants.EMPTY_STRING;
@@ -72,7 +67,7 @@ public class Product implements IItem, Serializable, IProduct
 	@Override
 	public String toString()
 	{
-		return "Product [id=" + id + ", itemID=" + itemID + ", introduction="
+		return "Product [itemID=" + itemID + ", introduction="
 				+ introduction + ", site=" + site + ", imageLink=" + imageLink
 				+ ", link=" + link + "]";
 	}

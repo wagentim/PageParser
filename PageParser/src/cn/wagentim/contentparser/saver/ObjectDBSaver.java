@@ -9,15 +9,16 @@ import javax.persistence.Persistence;
 public class ObjectDBSaver implements ISaver
 {
 	private final EntityManager em;
+	private final EntityManagerFactory emf;
 
 	public ObjectDBSaver()
 	{
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/product.odb");
+		emf = Persistence.createEntityManagerFactory("$objectdb/db/product.odb");
 		em = emf.createEntityManager();
 	}
 	
 	@Override
-	public void save(Product p)
+	public void save(IProduct p)
 	{
 		if( null == p )
 		{
@@ -30,7 +31,7 @@ public class ObjectDBSaver implements ISaver
 	}
 
 	@Override
-	public void save(List<Product> list)
+	public void save(List<IProduct> list)
 	{
 		if( list.isEmpty() )
 		{
@@ -41,11 +42,28 @@ public class ObjectDBSaver implements ISaver
 		
 		for(int i = 0; i < list.size(); i++ )
 		{
-			em.persist(list.get(i));
+			IProduct prod = list.get(i);
+			
+			if( null != prod && null == em.find(Product.class, prod))
+			{
+				em.persist(list.get(i));
+			}
 		}
 		
 		em.getTransaction().commit();
-		
 	}
 
+	@Override
+	public void close()
+	{
+		if( null != em )
+		{
+			em.close();
+		}
+		
+		if( null != emf )
+		{
+			emf.close();
+		}
+	}
 }

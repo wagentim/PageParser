@@ -149,7 +149,18 @@ public class Runner implements IHTMLConstants
 			}
 		}
 		
-		writeResultToFile(results);
+//		writeResultToFile(results);
+		writeResultToDB(results);
+	}
+	
+	private void writeResultToDB(List<IProduct> results)
+	{
+		if( Validator.isNull(results) || results.size() <= 0 )
+		{
+			logger.error("Runner#writeResultToDB the results that need to write to file is empty!");
+			return;
+		}
+		saver.save(results);
 	}
 	
 	private void writeResultToFile(List<IProduct> results)

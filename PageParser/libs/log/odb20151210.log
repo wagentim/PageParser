@@ -13,3 +13,67 @@ Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is op
 [2015-12-10 16:37:21 #1 store] 
 Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 4352@ESO5456
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-10 17:37:44 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 8616@ESO5456
+
+[2015-12-10 17:37:45 #2 type.registry] 
+New type cn.wagentim.contentparser.saver.IItem
+
+[2015-12-10 17:37:45 #3 type.registry] 
+New type cn.wagentim.contentparser.saver.IProduct
+
+[2015-12-10 17:37:45 #4 type.registry] 
+New type cn.wagentim.contentparser.saver.Product
+
+[2015-12-10 17:37:45 #5 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-10 17:39:51 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 7912@ESO5456
+
+[2015-12-10 17:39:52 #2 type.registry] 
+New type cn.wagentim.contentparser.saver.IItem
+
+[2015-12-10 17:39:52 #3 type.registry] 
+New type cn.wagentim.contentparser.saver.IProduct
+
+[2015-12-10 17:39:52 #4 type.registry] 
+New type cn.wagentim.contentparser.saver.Product
+
+[2015-12-10 17:39:52 #5 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-10 17:40:28 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' has been recovered (tr. 3-3)
+
+[2015-12-10 17:40:28 #2 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 4736@ESO5456
+
+[2015-12-10 17:40:28 #3 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-10 17:43:32 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' has been recovered (tr. 4-4)
+
+[2015-12-10 17:43:32 #2 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 7128@ESO5456
+
+[2015-12-10 17:43:32 #3 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-10 17:44:56 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 4520@ESO5456
+
+[2015-12-10 17:44:56 #2 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+
