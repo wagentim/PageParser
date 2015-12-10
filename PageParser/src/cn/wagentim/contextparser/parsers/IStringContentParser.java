@@ -1,6 +1,6 @@
 package cn.wagentim.contextparser.parsers;
 
-public interface IParserString
+public interface IStringContentParser
 {
 	String parser();
 }

@@ -1,5 +1,6 @@
 package cn.wagentim.xmlunits;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,7 +12,7 @@ public class Selector
 	private String key = StringConstants.EMPTY_STRING;;
 	private String parser = StringConstants.EMPTY_STRING;
 	private String result = StringConstants.EMPTY_STRING;
-	private String name = StringConstants.EMPTY_STRING;
+	private String def = StringConstants.EMPTY_STRING;
 	
 	@XmlElement
 	public void setKey(String key)
@@ -46,14 +47,15 @@ public class Selector
 		return result;
 	}
 
-	public String getName()
+	public String getDef()
 	{
-		return name;
+		return def;
 	}
 
-	@XmlElement
-	public void setName(String name)
+	@XmlAttribute
+	public void setDef(String def)
 	{
-		this.name = name;
+		this.def = def;
 	}
+
 }

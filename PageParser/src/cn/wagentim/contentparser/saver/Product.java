@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import cn.wagentim.basicutils.StringConstants;
 
 @Entity
-public class Product implements IItem, Serializable
+public class Product implements IItem, Serializable, IProduct
 {
 	/**
 	 * 
@@ -25,6 +25,7 @@ public class Product implements IItem, Serializable
 	private String introduction = StringConstants.EMPTY_STRING;
 	private String site = StringConstants.EMPTY_STRING;
 	private String imageLink = StringConstants.EMPTY_STRING;
+	private String link = StringConstants.EMPTY_STRING;
 	
 	public String getItemId()
 	{
@@ -59,11 +60,20 @@ public class Product implements IItem, Serializable
 		this.imageLink = imageLink;
 	}
 
+	public String getLink()
+	{
+		return link;
+	}
+	public void setLink(String link)
+	{
+		this.link = link;
+	}
+	
 	@Override
 	public String toString()
 	{
-		return "Product [ItemID=" + itemID + ", introduction=" + introduction
-				+ ", site=" + site + ", imageLink=" + imageLink + "]";
+		return "Product [id=" + id + ", itemID=" + itemID + ", introduction="
+				+ introduction + ", site=" + site + ", imageLink=" + imageLink
+				+ ", link=" + link + "]";
 	}
-	
 }

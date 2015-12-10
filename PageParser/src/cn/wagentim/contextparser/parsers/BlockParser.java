@@ -1,6 +1,5 @@
 package cn.wagentim.contextparser.parsers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,6 +8,8 @@ import org.jsoup.nodes.Element;
 
 import cn.wagentim.basicutils.StringConstants;
 import cn.wagentim.basicutils.Validator;
+import cn.wagentim.contentparser.saver.IProduct;
+import cn.wagentim.contentparser.saver.Product;
 import cn.wagentim.xmlunits.Block;
 import cn.wagentim.xmlunits.Selector;
 
@@ -18,17 +19,17 @@ import cn.wagentim.xmlunits.Selector;
  * @author bihu8398
  *
  */
-public class BlockParserString implements IParserString
+public class BlockParser implements ProductParser, INameConstants
 {
-	private static final Logger logger = LogManager.getLogger(BlockParserString.class);
+	private static final Logger logger = LogManager.getLogger(BlockParser.class);
 	private Block block = null;
 	private String siteInfo = StringConstants.EMPTY_STRING;
 	private Element parserElement = null;
-	private final SelectorParserString selectParser;
+	private final SelectorParser selectParser;
 	
-	public BlockParserString()
+	public BlockParser()
 	{
-		selectParser = new SelectorParserString();
+		selectParser = new SelectorParser();
 	}
 	
 	public Block getBlock()
@@ -42,30 +43,30 @@ public class BlockParserString implements IParserString
 	}
 
 	@Override
-	public String parser()
+	public IProduct parser()
 	{
 		if( siteInfo.isEmpty() )
 		{
 			logger.error("BlockParser#parser the current site infomation is invalid!");
-			return StringConstants.EMPTY_STRING;
+			return null;
 		}
 		
 		if( Validator.isNull(parserElement) )
 		{
 			logger.error(siteInfo + " : " + "BlockParser#parser the parser element is invalid!");
-			return StringConstants.EMPTY_STRING;
+			return null;
 		}
 
 		if( Validator.isNull(block) )
 		{
 			logger.error(siteInfo + " : " + "BlockParser#parser the block object is invalid!");
-			return StringConstants.EMPTY_STRING;
+			return null;
 		}
 		
 		if( Validator.isNull(selectParser) )
 		{
 			logger.error(siteInfo + " : " + "BlockParser#parser the seletor parser is invalid!");
-			return StringConstants.EMPTY_STRING;
+			return null;
 		}
 		
 		final List<Selector> selectors = block.getSelector();
@@ -73,40 +74,46 @@ public class BlockParserString implements IParserString
 		if( selectors.isEmpty() )
 		{
 			logger.error(siteInfo + " : " + "BlockParser#parser defined selectors is empty!");
-			return StringConstants.EMPTY_STRING;
+			return null;
 		}
 		
-		List<String> results = new ArrayList<String>();
+		IProduct prod = new Product();
 		selectParser.setElement(parserElement);
 		selectParser.setSiteInfo(siteInfo);
 		
 		for(int i = 0; i < selectors.size(); i++)
 		{
-			selectParser.setSelector(selectors.get(i));
-			results.add(selectParser.parser());
+			Selector selector = selectors.get(i);
+			selectParser.setSelector(selector);
+			String result = selectParser.parser();
+			assignValue(selector.getDef(), result, prod);
 		}
 		
-		final String sResult = processResult(results);
-		
-		return sResult;
+		return prod;
 	}
-	
-	private String processResult(List<String> results)
+
+	private void assignValue(String def, String result, IProduct prod)
 	{
-		if( results.isEmpty() )
+		if( PRODUCT_NAME_ID.equalsIgnoreCase(def) )
 		{
-			return StringConstants.EMPTY_STRING;
+			prod.setItemId(result);
 		}
-		
-		StringBuffer sb = new StringBuffer();
-		
-		for( int i = 0; i < results.size(); i++ )
+		else if( PRODUCT_NAME_IMAGE.equalsIgnoreCase(def) )
 		{
-			sb.append(results.get(i));
-			sb.append("\n");
+			prod.setImageLink(result);
 		}
-		
-		return sb.toString();
+		else if( PRODUCT_NAME_LINK.equalsIgnoreCase(def) )
+		{
+			prod.setLink(result);
+		}
+		else if( PRODUCT_NAME_SITE.equalsIgnoreCase(def) )
+		{
+			prod.setSite(result);
+		}
+		else if( PRODUCT_NAME_TITLE.equalsIgnoreCase(def) )
+		{
+			prod.setIntroduction(result);
+		}
 	}
 
 	public String getSiteInfo()

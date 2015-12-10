@@ -10,11 +10,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import cn.wagentim.basicutils.FileHelper;
+import cn.wagentim.basicutils.StringConstants;
 import cn.wagentim.basicutils.Validator;
 import cn.wagentim.connection.GetPageContent;
+import cn.wagentim.contentparser.saver.IProduct;
 import cn.wagentim.contentparser.saver.ISaver;
 import cn.wagentim.contentparser.saver.ObjectDBSaver;
-import cn.wagentim.contextparser.parsers.BlockParserString;
+import cn.wagentim.contextparser.parsers.BlockParser;
 import cn.wagentim.xmlunits.Block;
 import cn.wagentim.xmlunits.Site;
 
@@ -27,14 +29,14 @@ public class Runner implements IHTMLConstants
 	private static final String OUT_FILE = "c://temp//result.txt";
 	
 	private final XMLLoader loader;
-	private final BlockParserString blockParser;
+	private final BlockParser blockParser;
 	private FileHelper fh = null; 
 	private final ISaver saver;
 	
 	public Runner()
 	{
 		loader = new XMLLoader();
-		blockParser = new BlockParserString();
+		blockParser = new BlockParser();
 		saver = new ObjectDBSaver();
 	}
 	
@@ -108,7 +110,7 @@ public class Runner implements IHTMLConstants
 			return;
 		}
 		
-		List<String> results = new ArrayList<String>();
+		List<IProduct> results = new ArrayList<IProduct>();
 		
 		for( int i = 0; i < blocks.size(); i++ )
 		{
@@ -142,15 +144,15 @@ public class Runner implements IHTMLConstants
 			for(int j = 0; j < elements.size(); j++)
 			{
 				blockParser.setParserElement(elements.get(j));
-				String resultOfBlock = blockParser.parser();
-				results.add(resultOfBlock);
+				IProduct product = blockParser.parser();
+				results.add(product);
 			}
 		}
 		
 		writeResultToFile(results);
 	}
 	
-	private void writeResultToFile(List<String> results)
+	private void writeResultToFile(List<IProduct> results)
 	{
 		if( Validator.isNull(results) || results.size() <= 0 )
 		{
@@ -162,8 +164,19 @@ public class Runner implements IHTMLConstants
 		
 		for( int i = 0; i < results.size(); i++ )
 		{
-			sb.append(results.get(i));
-			sb.append("\n");
+			IProduct p = results.get(i);
+			
+			sb.append(p.getItemId());
+			sb.append(StringConstants.NEWLINE);
+			sb.append(p.getIntroduction());
+			sb.append(StringConstants.NEWLINE);
+			sb.append(p.getSite());
+			sb.append(StringConstants.NEWLINE);
+			sb.append(p.getImageLink());
+			sb.append(StringConstants.NEWLINE);
+			sb.append(p.getLink());
+			sb.append(StringConstants.NEWLINE);
+			sb.append(StringConstants.NEWLINE);
 		}
 		
 		if( null == fh )

@@ -5,27 +5,22 @@
 	<id>1</id>
 	<block>
 		<key>article</key>
-		<selector>
-			<name>ID</name>
+		<selector def="id">
 			<result>attr:id</result>
 		</selector>
-		<selector>
-			<name>Product</name>
+		<selector def="title">
 			<key>header h2 a</key>
 			<result>attr:title</result>
 		</selector>
-		<selector>
-			<name>website</name>
+		<selector def="site">
 			<key>header div.postdata span.category a</key>
 			<result>text</result>
 		</selector>
-		<selector>
-			<name>Image Link</name>
+		<selector def="img">
 			<key>a img</key>
 			<result>attr:src</result>
 		</selector>
-		<selector>
-			<name>Link</name>
+		<selector def="link">
 			<key>header div.title h2 a</key>
 			<result>attr:href</result>
 		</selector>

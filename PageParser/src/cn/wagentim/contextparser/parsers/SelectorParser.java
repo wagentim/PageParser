@@ -6,19 +6,21 @@ import org.jsoup.nodes.Element;
 
 import cn.wagentim.basicutils.StringConstants;
 import cn.wagentim.basicutils.Validator;
+import cn.wagentim.contentparser.saver.IProduct;
 import cn.wagentim.xmlunits.Selector;
 
-public class SelectorParserString implements IParserString
+public class SelectorParser implements IStringContentParser, INameConstants
 {
-	private static final Logger logger = LogManager.getLogger(SelectorParserString.class);
+	private static final Logger logger = LogManager.getLogger(SelectorParser.class);
 	private String siteInfo = StringConstants.EMPTY_STRING;
 	private Element parserElement = null;
 	private Selector selector = null;
-	private final ResultParserString resultParser;
+	private final ResultParser resultParser;
+	private IProduct product = null;
 	
-	public SelectorParserString()
+	public SelectorParser()
 	{
-		resultParser = new ResultParserString();
+		resultParser = new ResultParser();
 	}
 	
 	public Element getElement()
@@ -95,35 +97,34 @@ public class SelectorParserString implements IParserString
 			return StringConstants.EMPTY_STRING;
 		}
 		
-		IClassParser parser = null;
-		final String className = selector.getParser();
-		
-		if( !className.isEmpty() )
-		{
-			try
-			{
-				parser = (IClassParser)Class.forName(className).newInstance();
-				parser.setParserElement(selectedElement);
-				
-			}
-			catch (InstantiationException | IllegalAccessException
-					| ClassNotFoundException e1)
-			{
-				parser = null;
-			}
-		}
-
-		if( null != parser )
-		{
-			return parser.parser();
-		}
+//		IClassParser parser = null;
+//		final String className = selector.getParser();
+//		
+//		if( !className.isEmpty() )
+//		{
+//			try
+//			{
+//				parser = (IClassParser)Class.forName(className).newInstance();
+//				parser.setParserElement(selectedElement);
+//				
+//			}
+//			catch (InstantiationException | IllegalAccessException
+//					| ClassNotFoundException e1)
+//			{
+//				parser = null;
+//			}
+//		}
+//
+//		if( null != parser )
+//		{
+//			return parser.parser();
+//		}
 
 		final String resultDef = selector.getResult();
 		
 		resultParser.setParserElement(selectedElement);
 		resultParser.setResultDef(resultDef);
 		resultParser.setSiteInfo(siteInfo);
-		resultParser.setResultName(selector.getName());
 		
 		return resultParser.parser();
 	}
@@ -136,5 +137,15 @@ public class SelectorParserString implements IParserString
 	public void setSelector(Selector selector)
 	{
 		this.selector = selector;
+	}
+
+	public IProduct getProduct()
+	{
+		return product;
+	}
+
+	public void setProduct(IProduct product)
+	{
+		this.product = product;
 	}
 }
