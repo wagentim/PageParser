@@ -1,6 +1,8 @@
 package cn.wagentim.contentparser.display;
 
-public interface IDisplayer
+import cn.wagentim.contentparser.saver.IDBName;
+
+public interface IDisplayer extends IDBName
 {
-	void show();
+	void showAllProducts();
 }

@@ -10,12 +10,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import cn.wagentim.basicutils.FileHelper;
-import cn.wagentim.basicutils.StringConstants;
 import cn.wagentim.basicutils.Validator;
 import cn.wagentim.connection.GetPageContent;
-import cn.wagentim.contentparser.saver.IProduct;
 import cn.wagentim.contentparser.saver.ISaver;
 import cn.wagentim.contentparser.saver.ObjectDBSaver;
+import cn.wagentim.contentparser.saver.Product;
 import cn.wagentim.contextparser.parsers.BlockParser;
 import cn.wagentim.xmlunits.Block;
 import cn.wagentim.xmlunits.Site;
@@ -26,7 +25,6 @@ public class Runner implements IHTMLConstants
 	private static final String[] xmlFiles = new String[]{"dazhe.xml"};
 	private static final boolean readFromFile = false;
 	private static final String IN_FILE = "c://temp//temp.txt";
-	private static final String OUT_FILE = "c://temp//result.txt";
 	
 	private final XMLLoader loader;
 	private final BlockParser blockParser;
@@ -110,7 +108,7 @@ public class Runner implements IHTMLConstants
 			return;
 		}
 		
-		List<IProduct> results = new ArrayList<IProduct>();
+		List<Product> results = new ArrayList<Product>();
 		
 		for( int i = 0; i < blocks.size(); i++ )
 		{
@@ -144,7 +142,7 @@ public class Runner implements IHTMLConstants
 			for(int j = 0; j < elements.size(); j++)
 			{
 				blockParser.setParserElement(elements.get(j));
-				IProduct product = blockParser.parser();
+				Product product = blockParser.parser();
 				results.add(product);
 			}
 		}
@@ -153,7 +151,7 @@ public class Runner implements IHTMLConstants
 		writeResultToDB(results);
 	}
 	
-	private void writeResultToDB(List<IProduct> results)
+	private void writeResultToDB(List<Product> results)
 	{
 		if( Validator.isNull(results) || results.size() <= 0 )
 		{
@@ -161,41 +159,6 @@ public class Runner implements IHTMLConstants
 			return;
 		}
 		saver.save(results);
-	}
-	
-	private void writeResultToFile(List<IProduct> results)
-	{
-		if( Validator.isNull(results) || results.size() <= 0 )
-		{
-			logger.error("Runner#writeResultToFile the results that need to write to file is empty!");
-			return;
-		}
-		
-		StringBuffer sb = new StringBuffer();
-		
-		for( int i = 0; i < results.size(); i++ )
-		{
-			IProduct p = results.get(i);
-			
-			sb.append(p.getItemId());
-			sb.append(StringConstants.NEWLINE);
-			sb.append(p.getIntroduction());
-			sb.append(StringConstants.NEWLINE);
-			sb.append(p.getSite());
-			sb.append(StringConstants.NEWLINE);
-			sb.append(p.getImageLink());
-			sb.append(StringConstants.NEWLINE);
-			sb.append(p.getLink());
-			sb.append(StringConstants.NEWLINE);
-			sb.append(StringConstants.NEWLINE);
-		}
-		
-		if( null == fh )
-		{
-			fh = new FileHelper();
-		}
-		
-		fh.writeToFile(sb.toString(), OUT_FILE);
 	}
 	
 	public static void main(String[] args)

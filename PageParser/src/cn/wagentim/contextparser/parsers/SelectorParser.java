@@ -6,7 +6,7 @@ import org.jsoup.nodes.Element;
 
 import cn.wagentim.basicutils.StringConstants;
 import cn.wagentim.basicutils.Validator;
-import cn.wagentim.contentparser.saver.IProduct;
+import cn.wagentim.contentparser.saver.Product;
 import cn.wagentim.xmlunits.Selector;
 
 public class SelectorParser implements IStringContentParser, INameConstants
@@ -16,7 +16,7 @@ public class SelectorParser implements IStringContentParser, INameConstants
 	private Element parserElement = null;
 	private Selector selector = null;
 	private final ResultParser resultParser;
-	private IProduct product = null;
+	private Product product = null;
 	
 	public SelectorParser()
 	{
@@ -139,12 +139,12 @@ public class SelectorParser implements IStringContentParser, INameConstants
 		this.selector = selector;
 	}
 
-	public IProduct getProduct()
+	public Product getProduct()
 	{
 		return product;
 	}
 
-	public void setProduct(IProduct product)
+	public void setProduct(Product product)
 	{
 		this.product = product;
 	}

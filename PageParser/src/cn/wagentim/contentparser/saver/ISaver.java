@@ -2,9 +2,9 @@ package cn.wagentim.contentparser.saver;
 
 import java.util.List;
 
-public interface ISaver
+public interface ISaver extends IDBName
 {
-	void save(IProduct p);
-	void save(List<IProduct> list);
+	void save(Product p);
+	void save(List<Product> list);
 	void close();
 }

@@ -8,7 +8,6 @@ import org.jsoup.nodes.Element;
 
 import cn.wagentim.basicutils.StringConstants;
 import cn.wagentim.basicutils.Validator;
-import cn.wagentim.contentparser.saver.IProduct;
 import cn.wagentim.contentparser.saver.Product;
 import cn.wagentim.xmlunits.Block;
 import cn.wagentim.xmlunits.Selector;
@@ -43,7 +42,7 @@ public class BlockParser implements ProductParser, INameConstants
 	}
 
 	@Override
-	public IProduct parser()
+	public Product parser()
 	{
 		if( siteInfo.isEmpty() )
 		{
@@ -77,7 +76,7 @@ public class BlockParser implements ProductParser, INameConstants
 			return null;
 		}
 		
-		IProduct prod = new Product();
+		Product prod = new Product();
 		selectParser.setElement(parserElement);
 		selectParser.setSiteInfo(siteInfo);
 		
@@ -92,7 +91,7 @@ public class BlockParser implements ProductParser, INameConstants
 		return prod;
 	}
 
-	private void assignValue(String def, String result, IProduct prod)
+	private void assignValue(String def, String result, Product prod)
 	{
 		if( PRODUCT_NAME_ID.equalsIgnoreCase(def) )
 		{

@@ -13,12 +13,12 @@ public class ObjectDBSaver implements ISaver
 
 	public ObjectDBSaver()
 	{
-		emf = Persistence.createEntityManagerFactory("$objectdb/db/product.odb");
+		emf = Persistence.createEntityManagerFactory(DB_PRODUCT);
 		em = emf.createEntityManager();
 	}
 	
 	@Override
-	public void save(IProduct p)
+	public void save(Product p)
 	{
 		if( null == p )
 		{
@@ -31,7 +31,7 @@ public class ObjectDBSaver implements ISaver
 	}
 
 	@Override
-	public void save(List<IProduct> list)
+	public void save(List<Product> list)
 	{
 		if( list.isEmpty() )
 		{
@@ -42,7 +42,7 @@ public class ObjectDBSaver implements ISaver
 		
 		for(int i = 0; i < list.size(); i++ )
 		{
-			IProduct prod = list.get(i);
+			Product prod = list.get(i);
 			
 			if( null != prod && null == em.find(Product.class, prod))
 			{

@@ -1,0 +1,46 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-11 12:51:48 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 1344@ESO5456
+
+[2015-12-11 12:51:48 #2 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-11 12:56:40 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' has been recovered (tr. 7-7)
+
+[2015-12-11 12:56:40 #2 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 1112@ESO5456
+
+[2015-12-11 12:56:40 #3 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-11 13:14:20 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 7864@ESO5456
+
+[2015-12-11 13:14:20 #2 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-11 13:18:34 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' has been recovered (tr. 8-8)
+
+[2015-12-11 13:18:34 #2 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 5292@ESO5456
+
+[2015-12-11 13:18:34 #3 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2015-12-11 13:18:38 #1 store] 
+Database 'C:\Users\bihu8398\git\PageParser\PageParser\libs\db\product.odb' is opened by 5168@ESO5456
+
+[2015-12-11 13:18:38 #2 type] 
+Type cn.wagentim.contentparser.saver.Product is not enhanced.
+

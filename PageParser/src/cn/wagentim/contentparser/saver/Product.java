@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import cn.wagentim.basicutils.StringConstants;
 
 @Entity
-public class Product implements IItem, Serializable, IProduct
+public class Product implements IItem, Serializable
 {
 	/**
 	 * 
