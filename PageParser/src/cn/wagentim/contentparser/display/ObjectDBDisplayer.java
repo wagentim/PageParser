@@ -3,7 +3,6 @@ package cn.wagentim.contentparser.display;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
