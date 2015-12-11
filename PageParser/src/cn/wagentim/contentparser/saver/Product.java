@@ -21,6 +21,7 @@ public class Product implements IItem, Serializable
 	private String site = StringConstants.EMPTY_STRING;
 	private String imageLink = StringConstants.EMPTY_STRING;
 	private String link = StringConstants.EMPTY_STRING;
+	private long inTime = -1;
 	
 	public String getItemId()
 	{
@@ -63,12 +64,20 @@ public class Product implements IItem, Serializable
 	{
 		this.link = link;
 	}
-	
+
+	public long getInTime()
+	{
+		return inTime;
+	}
+	public void setInTime(long inTime)
+	{
+		this.inTime = inTime;
+	}
 	@Override
 	public String toString()
 	{
-		return "Product [itemID=" + itemID + ", introduction="
-				+ introduction + ", site=" + site + ", imageLink=" + imageLink
-				+ ", link=" + link + "]";
+		return "Product [itemID=" + itemID + ", introduction=" + introduction
+				+ ", site=" + site + ", imageLink=" + imageLink + ", link="
+				+ link + ", inTime=" + inTime + "]";
 	}
 }

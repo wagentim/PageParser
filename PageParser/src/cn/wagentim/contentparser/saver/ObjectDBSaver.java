@@ -24,8 +24,8 @@ public class ObjectDBSaver implements ISaver
 		{
 			return;
 		}
-		
 		em.getTransaction().begin();
+		setInTime(p);
 		em.persist(p);
 		em.getTransaction().commit();
 	}
@@ -46,11 +46,17 @@ public class ObjectDBSaver implements ISaver
 			
 			if( null != prod && null == em.find(Product.class, prod))
 			{
-				em.persist(list.get(i));
+				setInTime(prod);
+				em.persist(prod);
 			}
 		}
 		
 		em.getTransaction().commit();
+	}
+	
+	private void setInTime(Product p)
+	{
+		p.setInTime(System.currentTimeMillis());
 	}
 
 	@Override
