@@ -3,7 +3,7 @@
 	<name>DaZhe</name>
 	<link>http://dazhe.de/cn</link>
 	<id>1</id>
-	<block>
+	<block def="product">
 		<key>article</key>
 		<selector def="id">
 			<result>attr:id</result>
@@ -24,5 +24,10 @@
 			<key>header div.title h2 a</key>
 			<result>attr:href</result>
 		</selector>
+	</block>
+	<block def="nextpage">
+		<key>fix</key>
+		<value>http://dazhe.de/cn/page/</value>
+		<other>5</other>
 	</block>
 </site>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<name>BabyMarkt</name>
+	<link>http://www.babymarkt.de/sale/?per-page=60</link>
+	<id>2</id>
+	<block def="product">
+		<key>div.product-list</key>
+		<selector def="id">
+			<key>div.list-product a</key>
+			<result>attr:data-product-id</result>
+		</selector>
+		<selector def="title">
+			<key>div.product-picture</key>
+			<result>attr:title</result>
+		</selector>
+		<selector def="newprice">
+			<key>div.product-price</key>
+			<result>text</result>
+		</selector>
+		<selector def="oldprice">
+			<key>div.product-old-price</key>
+			<result>text</result>
+		</selector>
+	</block>
+	<block def="nextpage">
+		<key>ignore</key>
+		<other>1</other>
+	</block>
+</site>

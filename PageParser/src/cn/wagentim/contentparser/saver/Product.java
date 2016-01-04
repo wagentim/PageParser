@@ -21,6 +21,8 @@ public class Product implements IItem, Serializable
 	private String site = StringConstants.EMPTY_STRING;
 	private String imageLink = StringConstants.EMPTY_STRING;
 	private String link = StringConstants.EMPTY_STRING;
+	private String newPrice = StringConstants.EMPTY_STRING;
+	private String oldPrice = StringConstants.EMPTY_STRING;
 	private long inTime = -1;
 	
 	public String getItemId()
@@ -73,11 +75,29 @@ public class Product implements IItem, Serializable
 	{
 		this.inTime = inTime;
 	}
+	public String getNewPrice()
+	{
+		return newPrice;
+	}
+	public void setNewPrice(String newPrice)
+	{
+		this.newPrice = newPrice;
+	}
+	public String getOldPrice()
+	{
+		return oldPrice;
+	}
+	public void setOldPrice(String oldPrice)
+	{
+		this.oldPrice = oldPrice;
+	}
+	
 	@Override
 	public String toString()
 	{
 		return "Product [itemID=" + itemID + ", introduction=" + introduction
 				+ ", site=" + site + ", imageLink=" + imageLink + ", link="
-				+ link + ", inTime=" + inTime + "]";
+				+ link + ", newPrice=" + newPrice + ", oldPrice=" + oldPrice
+				+ ", inTime=" + inTime + "]";
 	}
 }

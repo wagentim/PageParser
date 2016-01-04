@@ -13,4 +13,13 @@ public interface INameConstants
 	public static final String PRODUCT_NAME_TITLE = "title";
 	public static final String PRODUCT_NAME_IMAGE = "img";
 	public static final String PRODUCT_NAME_LINK = "link";
+	public static final String PRODUCT_NAME_NEW_PRICE = "newprice";
+	public static final String PRODUCT_NAME_OLD_PRICE = "oldprice";
+	
+	
+	public static final String BLOCK_NEXT_PAGE = "nextpage";
+	public static final String BLOCK_PRODUCT = "product";
+	public static final String BLOCK_FIX = "fix";
+	public static final String BLOCK_IGNORE = "ignore";
+	
 }

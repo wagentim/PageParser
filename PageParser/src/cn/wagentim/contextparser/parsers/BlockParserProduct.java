@@ -18,15 +18,15 @@ import cn.wagentim.xmlunits.Selector;
  * @author bihu8398
  *
  */
-public class BlockParser implements ProductParser, INameConstants
+public class BlockParserProduct implements IParser<Product>, INameConstants
 {
-	private static final Logger logger = LogManager.getLogger(BlockParser.class);
+	private static final Logger logger = LogManager.getLogger(BlockParserProduct.class);
 	private Block block = null;
 	private String siteInfo = StringConstants.EMPTY_STRING;
 	private Element parserElement = null;
 	private final SelectorParser selectParser;
 	
-	public BlockParser()
+	public BlockParserProduct()
 	{
 		selectParser = new SelectorParser();
 	}
@@ -112,6 +112,14 @@ public class BlockParser implements ProductParser, INameConstants
 		else if( PRODUCT_NAME_TITLE.equalsIgnoreCase(def) )
 		{
 			prod.setIntroduction(result);
+		}
+		else if( PRODUCT_NAME_NEW_PRICE.equalsIgnoreCase(def) )
+		{
+			prod.setNewPrice(result);
+		}
+		else if( PRODUCT_NAME_OLD_PRICE.equalsIgnoreCase(def) )
+		{
+			prod.setOldPrice(result);
 		}
 	}
 

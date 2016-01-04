@@ -3,6 +3,8 @@ package cn.wagentim.contentparser.display;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,13 +24,15 @@ public class ObjectDBDisplayer implements IDisplayer, ISQLStatements
 	private final EntityManagerFactory emf;
 	private FileHelper fh = null; 
 	private static final String OUT_FILE = "c://temp//result.txt";
-	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+	private final List<IOutputFilter> filters;
 	
 	public ObjectDBDisplayer()
 	{
 		emf = Persistence.createEntityManagerFactory(DB_PRODUCT);
 		em = emf.createEntityManager();
 		fh = new FileHelper();
+		filters = new ArrayList<IOutputFilter>();
 	}
 
 	@Override
@@ -43,7 +47,27 @@ public class ObjectDBDisplayer implements IDisplayer, ISQLStatements
 		}
 	}
 	
-	public void writeResultToConsole(List<Product> results)
+	public void removeFilter(Class<IOutputFilter> filter)
+	{
+		if( null == filter )
+		{
+			return;
+		}
+		
+		Iterator<IOutputFilter> it = filters.iterator();
+		
+		while( it.hasNext() )
+		{
+			IOutputFilter currFilter = it.next();
+			
+			if( currFilter.getClass().equals(filter) )
+			{
+				filters.remove(currFilter);
+			}
+		}
+	}
+	
+	public void writeResultToConsole(List<Product> results )
 	{
 		System.out.println(createOutputString(results));
 	}
@@ -53,6 +77,16 @@ public class ObjectDBDisplayer implements IDisplayer, ISQLStatements
 		if( Validator.isNull(results) || results.size() <= 0 )
 		{
 			return StringConstants.EMPTY_STRING;
+		}
+		
+		if( !filters.isEmpty() )
+		{
+			Iterator<IOutputFilter> it = filters.iterator();
+			
+			while(it.hasNext())
+			{
+				results = it.next().filter(results);
+			}
 		}
 		
 		StringBuffer sb = new StringBuffer();
@@ -79,7 +113,7 @@ public class ObjectDBDisplayer implements IDisplayer, ISQLStatements
 		return sb.toString();
 	}
 
-	private String formatTime(long inTime)
+	public static String formatTime(long inTime)
 	{
 		return dateFormat.format(new Date(inTime));
 	}
@@ -94,5 +128,32 @@ public class ObjectDBDisplayer implements IDisplayer, ISQLStatements
 		}
 		
 		fh.writeToFile(output, OUT_FILE);
+	}
+
+	@Override
+	public void showAllProductsForToday()
+	{
+		if( null != em && em.isOpen() )
+		{
+			TypedQuery<Product> query = em.createQuery(SELECT_ALL_PRODUCT, Product.class);
+		    List<Product> results = query.getResultList();
+		    writeResultToConsole(results);
+		}
+		
+	}
+
+	@Override
+	public void addFilter(IOutputFilter filter)
+	{
+		if( null == filter )
+		{
+			return;
+		}
+		
+		if( !filters.contains(filter) )
+		{
+			filters.add(filter);
+		}
+		
 	}
 }
