@@ -2,11 +2,12 @@
 <site>
 	<name>BabyMarkt</name>
 	<link>http://www.babymarkt.de/sale/?per-page=60</link>
+	<host>http://www.babymarkt.de</host>
 	<id>2</id>
 	<block def="product">
-		<key>div.product-list</key>
+		<key>div.row.product-list div.list-product</key>
 		<selector def="id">
-			<key>div.list-product a</key>
+			<key>a.product-link</key>
 			<result>attr:data-product-id</result>
 		</selector>
 		<selector def="title">
@@ -20,6 +21,14 @@
 		<selector def="oldprice">
 			<key>div.product-old-price</key>
 			<result>text</result>
+		</selector>
+		<selector def="img">
+			<key>div.product-picture img</key>
+			<result>attr:data-original</result>
+		</selector>
+		<selector def="link">
+			<key>a.product-link</key>
+			<result>attr:href</result>
 		</selector>
 	</block>
 	<block def="nextpage">

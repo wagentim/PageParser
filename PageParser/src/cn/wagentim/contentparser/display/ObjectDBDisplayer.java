@@ -95,22 +95,27 @@ public class ObjectDBDisplayer implements IDisplayer, ISQLStatements
 		{
 			Product p = results.get(i);
 			
-			sb.append(formatTime(p.getInTime()));
-			sb.append(StringConstants.NEWLINE);
-//			sb.append(p.getItemId());
-//			sb.append(StringConstants.NEWLINE);
-			sb.append(p.getIntroduction());
-//			sb.append(StringConstants.NEWLINE);
-//			sb.append(p.getSite());
-//			sb.append(StringConstants.NEWLINE);
-//			sb.append(p.getImageLink());
-			sb.append(StringConstants.NEWLINE);
-			sb.append(p.getLink());
-			sb.append(StringConstants.NEWLINE);
+			addContent(formatTime(p.getInTime()),sb);
+			addContent(p.getItemId(),sb);
+			addContent(p.getIntroduction(),sb);
+			addContent(p.getSite(),sb);
+			addContent(p.getImageLink(),sb);
+			addContent(p.getLink(),sb);
+			addContent(p.getOldPrice(),sb);
+			addContent(p.getNewPrice(),sb);
 			sb.append(StringConstants.NEWLINE);
 		}
 		
 		return sb.toString();
+	}
+	
+	private void addContent(String content, StringBuffer sb)
+	{
+		if( !Validator.isNullOrEmpty(content) )
+		{
+			sb.append(content);
+			sb.append(StringConstants.NEWLINE);
+		}
 	}
 
 	public static String formatTime(long inTime)

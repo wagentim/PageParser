@@ -62,7 +62,7 @@ public class BlockParserNextPage implements IParser<String>
 		{
 			result = nextPageBlock.getValue() + currentPage;
 		}
-		if( INameConstants.BLOCK_IGNORE.equalsIgnoreCase(key) )
+		else if( INameConstants.BLOCK_IGNORE.equalsIgnoreCase(key) )
 		{
 			
 		}

@@ -12,6 +12,7 @@ public class Site
 {
 	private String name = StringConstants.EMPTY_STRING;
 	private String link = StringConstants.EMPTY_STRING;
+	private String host = StringConstants.EMPTY_STRING;
 	private int id;
 	private List<Block> block;
 	
@@ -60,10 +61,22 @@ public class Site
 		this.id = id;
 	}
 
+	public String getHost()
+	{
+		return host;
+	}
+
+	@XmlElement
+	public void setHost(String host)
+	{
+		this.host = host;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Site [name=" + name + ", link=" + link + ", id=" + id
-				+ ", block=" + block + "]";
+		return "Site [name=" + name + ", link=" + link + ", host=" + host
+				+ ", id=" + id + ", block=" + block + "]";
 	}
+	
 }

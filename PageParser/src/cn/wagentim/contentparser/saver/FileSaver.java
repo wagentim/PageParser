@@ -46,11 +46,11 @@ public class FileSaver implements ISaver
 			sb.append(StringConstants.NEWLINE);
 //			sb.append(p.getSite());
 //			sb.append(StringConstants.NEWLINE);
-//			sb.append(p.getImageLink());
-//			sb.append(StringConstants.NEWLINE);
-//			sb.append(p.getLink());
-//			sb.append(StringConstants.NEWLINE);
-//			sb.append(StringConstants.NEWLINE);
+			sb.append(p.getImageLink());
+			sb.append(StringConstants.NEWLINE);
+			sb.append(p.getLink());
+			sb.append(StringConstants.NEWLINE);
+			sb.append(StringConstants.NEWLINE);
 		}
 		
 		fileHelper.writeToFile(sb.toString(), file);

@@ -29,8 +29,11 @@ import cn.wagentim.xmlunits.Site;
 public class Runner implements IHTMLConstants
 {
 	private static final Logger logger = LogManager.getLogger(Runner.class);
-	private static final String[] xmlFiles = new String[]{"babymarkt.xml"};
-	private static final boolean saveToFile = true;
+	private static final String[] xmlFiles = new String[]{
+		"dazhe.xml",
+		"babymarkt.xml"
+	};
+	private static final boolean saveToFile = false;
 	private static final String FILE_IN = "c://temp//temp.txt";
 	private static final String FILE_OUT = "c://temp//out.txt";
 	
@@ -130,7 +133,6 @@ public class Runner implements IHTMLConstants
 			productParser.setParserElement(it.next());
 			products.add(productParser.parser());
 		}
-		
 	}
 	
 	public boolean shouldStopParser()
@@ -150,7 +152,7 @@ public class Runner implements IHTMLConstants
 
 		preProcessBlocks(blocks);
 		
-		productParser.setSiteInfo(site.getName());
+		productParser.setSite(site);
 		productParser.setBlock(blockParsers.get(INameConstants.BLOCK_PRODUCT));
 		
 		nextPageParser.setSiteInfo(site.getName());

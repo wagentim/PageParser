@@ -9,8 +9,11 @@ import org.jsoup.nodes.Element;
 import cn.wagentim.basicutils.StringConstants;
 import cn.wagentim.basicutils.Validator;
 import cn.wagentim.contentparser.saver.Product;
+import cn.wagentim.decorator.IDecorator;
+import cn.wagentim.decorator.WebLinkDecorator;
 import cn.wagentim.xmlunits.Block;
 import cn.wagentim.xmlunits.Selector;
+import cn.wagentim.xmlunits.Site;
 
 /**
  * Attention!! not thread safe. Please use single thread
@@ -22,13 +25,16 @@ public class BlockParserProduct implements IParser<Product>, INameConstants
 {
 	private static final Logger logger = LogManager.getLogger(BlockParserProduct.class);
 	private Block block = null;
-	private String siteInfo = StringConstants.EMPTY_STRING;
+	private Site site = null;
 	private Element parserElement = null;
 	private final SelectorParser selectParser;
+	private final IDecorator<String> linkDecorator;
+	private String siteInfo = StringConstants.EMPTY_STRING;
 	
 	public BlockParserProduct()
 	{
 		selectParser = new SelectorParser();
+		linkDecorator = new WebLinkDecorator();
 	}
 	
 	public Block getBlock()
@@ -99,11 +105,11 @@ public class BlockParserProduct implements IParser<Product>, INameConstants
 		}
 		else if( PRODUCT_NAME_IMAGE.equalsIgnoreCase(def) )
 		{
-			prod.setImageLink(result);
+			prod.setImageLink(linkDecorator.decorate(result));
 		}
 		else if( PRODUCT_NAME_LINK.equalsIgnoreCase(def) )
 		{
-			prod.setLink(result);
+			prod.setLink(linkDecorator.decorate(result));
 		}
 		else if( PRODUCT_NAME_SITE.equalsIgnoreCase(def) )
 		{
@@ -123,14 +129,16 @@ public class BlockParserProduct implements IParser<Product>, INameConstants
 		}
 	}
 
-	public String getSiteInfo()
+	public Site getSite()
 	{
-		return siteInfo;
+		return site;
 	}
 
-	public void setSiteInfo(String siteInfo)
+	public void setSite(Site site)
 	{
-		this.siteInfo = siteInfo;
+		this.site = site;
+		siteInfo = site.getName();
+		linkDecorator.setSite(site);
 	}
 
 	public Element getParserElement()
